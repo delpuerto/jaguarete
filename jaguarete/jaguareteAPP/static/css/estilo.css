@@ -1,0 +1,221 @@
+body
+{
+    margin: 0 auto;
+    font-family: sans-serif;
+    /* background-color: aquamarine; */
+    background-color: rgb(202, 245, 248);
+    max-width: 1012px;
+}
+
+
+
+
+/* Codigo para el menu principal */
+header{
+    width: 100%;
+    background: #4E94AB;
+}
+#btn-menu{
+    display: none;
+}
+header label {
+    display: none;
+    width: 30px;
+    height: 30px;
+    padding: 10px;
+    border-right: 1px solid #FFF;
+}
+header label:hover {
+    cursor: pointer;
+    background: rgba(0,0,0,0.3);
+}
+ .menu ul{
+     margin: 0;
+     list-style: none;
+     padding: 0;
+     display: flex;
+ }
+ .menu li {
+     border-right: 1px solid #FFF;
+ }
+.menu li:hover {
+    background: rgba(0,0,0,0.3);
+}
+.menu li a {
+    display: block;
+    padding: 5px 20px;
+    color: #FFF;
+    text-decoration: none;
+}
+@media (max-width: 750px) {
+    header label {
+        display: block;
+    }
+
+    .menu {
+        position: absolute;
+        background: #4E94AB;
+        width: 40%;
+        margin-left: -70%;
+        transition: all 0.3s;
+    }
+
+    .menu ul {
+        flex-direction: column;
+    }
+
+    .menu li {
+        border-top: 1px solid #FFF;
+    }
+
+    #btn-menu:checked ~ .menu {
+        margin: 0;
+    }
+}
+
+
+
+
+/* Codigo para en InputText de Buscar del menu principal */
+.buscador {
+    background-color: #FFF;
+	padding: 4px;
+	height: 20px;
+	width: 170px;
+}
+input.buscar {
+	border: 1px;
+	width: 140px;
+	position: relative;
+	background: transparent;
+	outline: none;
+	bottom: 4px;
+	padding: 2px;
+}
+input.image_buscar {
+	width: 15px;
+	border: 0px;
+	position: relative;
+	top:1px;
+}
+
+
+
+
+
+/* Codigo para pie de pagina */
+.footer {
+    width: 100%;
+    background: #226d86;
+    box-sizing: border-box;
+    text-align: center;
+    font-size: 11px;
+    font-weight: 500;
+    min-height: 165px;
+}
+.footer a{
+    text-decoration: none;
+    color: #FFF;
+}
+.footer .footer-left,
+.footer .footer-center,
+.footer .footer-right {
+    display: inline-block;
+    vertical-align: top;
+    padding: 0 15px;
+    font-size: 11px;
+    color: #FFF;
+    width: 250px;
+}
+.footer i {   
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 28px;
+    margin: 5px 10px;
+    vertical-align: middle;
+    background: rgba(14, 13, 13, 0.527);
+    font-size: 14px;
+}
+.pleft {
+    text-align: left;
+    align-self: flex-start;
+    padding: 0;
+    margin: 0;
+}
+.pjust{
+    text-align: justify;
+    padding: 0;
+    margin: 0;
+}
+.footer h3{
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: large;
+    margin: 0;
+    padding: 8px;
+}
+
+
+/*Codigo del cuerpo*/
+.cuerpo{
+    width: 100%;
+    background-color: #FFF;
+    padding: 3px;
+    margin-top: 6px;
+    margin-left: 6px;
+    margin-right: 10px;
+    margin-bottom: 15px;
+    min-height: calc(100vh - 281px);
+    box-shadow: 3px 4px 4px 2px rgba(0, 0, 0, 0.3);
+    border-radius: 6px 6px 6px 6px;
+}
+.cuerpobg{
+    display: flex;
+    background-color: rgba(243, 234, 234, 0.685);
+    margin: 0;
+    padding: 0;
+}
+
+
+/* Codigo para el encabezado de pagina */
+.logomnu{
+    max-width: 100px;
+    border-radius: 6px 6px  6px 6px;
+    margin: 3px;
+}
+.encabezado{
+    width: 100%;
+    min-height: 54px;
+    margin: 0;
+    padding: 0;
+    background: #226d86;
+    color: #FFF;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+}
+.encabezado .encaizq{
+    display: inline-block;
+    vertical-align: top;
+    padding: 0;
+    margin: 0;
+}
+.encabezado .encader{
+    display: inline-block;
+    width: 90%;
+    padding: 0;
+    margin-right: 5px;
+    text-align: right;   
+}
+.btnBase2{
+    background-color:#ffdc57;
+	border:1px solid #b25a14;
+	border-radius:0 6px  0 6px;
+	font-weight:bold;
+	color:#773b00;
+	padding:4px;
+    margin-top: 12px;
+    margin-right: 3px;
+}
