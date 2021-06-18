@@ -9,4 +9,6 @@ def index(request):
 def acerca(request):
     return HttpResponse("del Puerto Software (c)2021")
 
-     
+def home(request):
+    return render(request,"home/home.html")
+    
