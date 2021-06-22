@@ -16,7 +16,7 @@
     <link type="text/css" rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <title>Jaguarete Kaa S.A.</title>
 </head>
-<body>
+<body class="bdyclss">
 
     <div class="encabezado">        
         <div class="encaizq">
@@ -24,21 +24,27 @@
         </div>
         <div class="encader">
                 {% if user.is_authenticated %} 
-                <input type="button" value="Logout"    name="Btn_1" class="btnBase2" onclick="Btn_1(2);">
+                    <a href="{% url 'logout' %}">
+                        <input type="button" value="Logout"  name="Btn_1" class="btnBase2">
+                    </a>
                 {% else %}
-                    <input type="button" value="Login"    name="Btn_1" class="btnBase2" onclick="Btn_1(1);">
+                    <a href="{% url 'login' %}">
+                        <input type="button" value="Login"   name="Btn_1" class="btnBase2">
+                    </a>
                 {% endif %}
-                <input type="button" value="Registro" name="Btn_2" class="btnBase2" onclick="Btn_2();">
+                <a href="{% url 'registro' %}">
+                    <input type="button" value="Registro" name="Btn_2" class="btnBase2">
+                </a>
                 <input type="button" value="Carrito"  name="Btn_3" class="btnBase2" onclick="Btn_3();">
         </div>    
     </div>
 
     <header>
         <input type="checkbox" id="btn-menu">
-        <label for="btn-menu"><img src="{% static '/img/Menu_icon_2.png' %}" width="32" height="32" alt=""></label>
+        <label for="btn-menu"><img src="{% static '/img/Menu_icon_2.png' %}" width="25" height="25" alt=""></label>
         <nav class="menu">
             <ul>
-                <li><a href="">Home</a></li>
+                <li><a href="{% url 'index' %}">Home</a></li>
                 <li><a href="">Categorias</a></li>
                 <li><a href="#" onclick="acercade();">Acerca de</a></li>
                 <li><a href="">Contacto</a></li>
@@ -49,9 +55,15 @@
                             <input type="text" class="buscar" name="busk" id="busk" placeholder="Buscar..." title="Ingrese la busqueda y pulse Enter" onkeyup="if(event.keyCode == 13)busqueda();">
                             <input type="image" src="{% static '/img/lupa.png' %}" class="image_buscar">
                         </form>
-                    </div>                    
+                    </div> 
+                </li>
+                <li>
+                    {% if user.is_authenticated %}
+                    {{user.username}}
+                    {% endif %}                   
                 </li>
             </ul>
+            
         </nav>
     </header>
     

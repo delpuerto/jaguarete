@@ -37,7 +37,7 @@
                 <input type="button" value="Registro" name="Btn_2" class="btnBase2">
             </a>
             <input type="button" value="Carrito"  name="Btn_3" class="btnBase2" onclick="Btn_3();">
-        </div>    
+        </div>  
     </div>
 
     <header>
@@ -74,16 +74,16 @@
                 <div class="col 12 col-md-6 offset-md-3">
                     <div class="card">
                         <div class="card-body">
-                            <h2>Inicio de sesión</h2>
+                            <h2>Registro de Usuarios</h2>
                             <hr>
                             <form action="" method="post">
                                 {% csrf_token %}
                                 {{ form | crispy }}
 
                                 <br>
-                                <a href="{% url 'index' %}">Regresar</a>
-                                &nbsp;&nbsp;&nbsp;<a href="{% url 'registro' %}">Registrarse</a>
-                                <input type="submit" value="Ingresar" class="btn btn-primary float-right" style="float: right;">
+                                <a href="{% url 'index' %}">Regresar</a>                                
+                                &nbsp;&nbsp;&nbsp;<a href="{% url 'login' %}">Iniciar sesion</a>
+                                <input type="submit" value="Registrar" class="btn btn-primary float-right" style="float: right;">
                             </form>
                         </div>
                     </div>

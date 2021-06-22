@@ -7,6 +7,14 @@ body
     max-width: 1012px;
 }
 
+.bdyclss
+{
+    margin: 0 auto;
+    font-family: sans-serif;
+    /* background-color: aquamarine; */
+    background-color: rgb(202, 245, 248);
+    max-width: 1012px;
+}
 
 
 
@@ -15,14 +23,19 @@ header{
     width: 100%;
     background: #4E94AB;
 }
+.mnuimg{
+    margin: 0;
+    padding: 0;
+    align-self: flex-start;
+}
 #btn-menu{
     display: none;
 }
 header label {
     display: none;
-    width: 30px;
-    height: 30px;
-    padding: 10px;
+    width: 40px;
+    height: 40px;
+    padding: 5px;
     border-right: 1px solid #FFF;
 }
 header label:hover {
@@ -79,8 +92,9 @@ header label:hover {
 /* Codigo para en InputText de Buscar del menu principal */
 .buscador {
     background-color: #FFF;
+    margin-top: 3px;
 	padding: 4px;
-	height: 20px;
+	height: 28px;
 	width: 170px;
 }
 input.buscar {
