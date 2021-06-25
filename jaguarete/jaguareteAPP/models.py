@@ -32,12 +32,13 @@ class Categoria(models.Model):
 
 
 class Producto(models.Model):
-    nombre        = models.CharField(max_length=50)
-    precio        = models.FloatField(null=True)
-    descripcion   = models.TextField(null=True)
-    nuevo         = models.BooleanField(default=False)
-    categoria     = models.ForeignKey(Categoria, on_delete=models.PROTECT)    
-
+    nombre      = models.CharField(max_length=50)
+    precio      = models.FloatField(null=True)
+    descripcion = models.TextField(null=True)
+    nuevo       = models.BooleanField(default=False)
+    categoria   = models.ForeignKey(Categoria, on_delete=models.PROTECT)
+    imagen      = models.ImageField(upload_to="productos", null=True)
+    
     def __str__(self):
         return self.nombre
 

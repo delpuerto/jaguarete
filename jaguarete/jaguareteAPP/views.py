@@ -3,10 +3,15 @@ from django.http import HttpResponse
 from .forms import CustomUserCreationForm, ContactoForm
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
+from .models import Producto
 
 # PAGINA INICIAL
 def index(request):
-    return render(request,"home/index.html")
+    productos = Producto.objects.all().order_by('-id')[:3]
+    data = {
+        'productos': productos 
+    }
+    return render(request,"home/index.html", data)
 
 
 # PAGINA ACERCA DE
