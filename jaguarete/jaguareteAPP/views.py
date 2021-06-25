@@ -1,6 +1,6 @@
 from django.shortcuts import redirect, render
 from django.http import HttpResponse
-from .forms import CustomUserCreationForm, ContactoForm
+from .forms import CustomUserCreationForm, ContactoForm, ProductoForm
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from .models import Producto
@@ -8,8 +8,10 @@ from .models import Producto
 # PAGINA INICIAL
 def index(request):
     productos = Producto.objects.all().order_by('-id')[:3]
+    todos     = Producto.objects.all()
     data = {
-        'productos': productos 
+        'productos': productos,
+        'todos': todos 
     }
     return render(request,"home/index.html", data)
 
@@ -53,3 +55,29 @@ def registro(request):
             return redirect(to="index")
         data["form"] = formulario
     return render(request,"registration/registro.html",data)
+
+
+
+# PAGINA AGREGAR PRODUCTO
+def agregar_producto(request):
+    data = {
+        'form': ProductoForm()
+    }
+    if request.method == 'POST':
+        formulario = ProductoForm(data=request.POST, files=request.FILES)
+        if formulario.is_valid():
+            formulario.save()
+            data["mensaje"] = "Guardado correctamente!"
+        else:
+            data["form"] = formulario
+    return render(request,"producto/agregar.html", data)
+
+
+    # PAGINA INICIAL
+def listar_productos(request):
+    productos = Producto.objects.all()
+    data = {
+        'productos': productos 
+    }
+    return render(request,"producto/listar.html", data)
+

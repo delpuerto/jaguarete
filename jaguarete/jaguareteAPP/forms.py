@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.db.models import fields
-from .models import Contacto
+from .models import Contacto, Producto
 
 
 
@@ -24,3 +24,9 @@ class ContactoForm(forms.ModelForm):
         fields = '__all__'
 
 
+# Formulario Productos
+class ProductoForm(forms.ModelForm):
+
+    class Meta:
+        model = Producto
+        fields = '__all__'
