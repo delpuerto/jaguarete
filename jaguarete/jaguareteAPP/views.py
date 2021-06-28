@@ -75,6 +75,7 @@ def agregar_producto(request):
         if formulario.is_valid():
             formulario.save()
             data["mensaje"] = "Guardado correctamente!"
+            messages.success(request, "Guardado correctamente")
         else:
             data["form"] = formulario
     return render(request,"producto/agregar.html", data)
@@ -103,6 +104,7 @@ def modificar_producto(request, id):
         formulario = ProductoForm(data=request.POST, instance=producto, files=request.FILES)
         if formulario.is_valid():
             formulario.save()
+            messages.success(request, "Se modifico correctamente")
             return redirect(to="listar_productos")
         else:
             data["form"] = formulario
@@ -116,6 +118,7 @@ def modificar_producto(request, id):
 def eliminar_producto(request, id):
     producto = get_object_or_404(Producto, id=id)
     producto.delete()
+    messages.success(request, "Eliminado correctamente")
     return redirect(to="listar_productos")
 
 
@@ -132,6 +135,7 @@ def agregar_categoria(request):
         if formulario.is_valid():
             formulario.save()
             data["mensaje"] = "Guardado correctamente!"
+            messages.success(request, "Guardado correctamente")
         else:
             data["form"] = formulario
     return render(request,"categoria/agregar.html", data)
@@ -158,6 +162,7 @@ def modificar_categoria(request, id):
         formulario = CategoriaForm(data=request.POST, instance=categoria)
         if formulario.is_valid():
             formulario.save()
+            messages.success(request, "Modificado correctamente")
             return redirect(to="listar_categorias")
         else:
             data["form"] = formulario
@@ -171,4 +176,5 @@ def modificar_categoria(request, id):
 def eliminar_categoria(request, id):
     categoria = get_object_or_404(Categoria, id=id)
     categoria.delete()
+    messages.success(request, "Eliminada correctamente")
     return redirect(to="listar_categorias")
