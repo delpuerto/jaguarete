@@ -1,0 +1,45 @@
+{% extends 'home/base.html' %}
+{% block contenido %}
+
+{% load crispy_forms_tags %} 
+{% load humanize %}
+
+<br>
+<div class="container bg-light">
+    <br>
+    <div class="card">
+        <div class="card-body">
+            <h2>Lista de Categorias</h2>
+            <hr>
+            <table class="table table-striped table-hover table-responsive-sm">
+                <tr>
+                    <th>Nombre</th>
+                    <th>Opciones</th>
+                </tr>
+            
+                {% for p in categorias %}
+                    <tr>
+                        <td>{{p.nombre | title}}</td>
+                        <td>
+                            <a href="{% url 'modificar_categoria' p.id %}" class="btn btn-info btn-sm">Modificar</a>
+                            &nbsp;
+                            <a href="{% url 'eliminar_categoria' p.id %}" class="btn btn-danger btn-sm">Eliminar</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+
+        </div>
+    </div>
+
+    <br>
+    <center>
+    <a href="{% url 'agregar_categoria' %}" class="btn btn-primary btn-sm">Agregar Nueva Categoria</a>
+    </center>
+    <br>
+</div>
+
+<br>
+<br>
+<br>
+{% endblock %}

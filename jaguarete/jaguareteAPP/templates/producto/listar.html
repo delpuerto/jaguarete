@@ -5,8 +5,8 @@
 {% load humanize %}
 
 <br>
-<br>
 <div class="container bg-light">
+    <br>
     <div class="card">
         <div class="card-body">
             <h2>Lista de productos</h2>
@@ -17,6 +17,7 @@
                     <th>Precio</th>
                     <th>Categoria</th>
                     <th>¿Es Nuevo?</th>
+                    <th>Opciones</th>
                 </tr>
             
                 {% for p in productos %}
@@ -31,12 +32,23 @@
                                 No
                             {% endif %}
                         </td>
+                        <td>
+                            <a href="{% url 'modificar_producto' p.id %}" class="btn btn-info btn-sm">Modificar</a>
+                            &nbsp;
+                            <a href="{% url 'eliminar_producto' p.id %}" class="btn btn-danger btn-sm">Eliminar</a>
+                        </td>
                     </tr>
                 {% endfor %}
             </table>
 
         </div>
     </div>
+
+    <br>
+    <center>
+    <a href="{% url 'agregar_producto' %}" class="btn btn-primary btn-sm">Agregar Nuevo Producto</a>
+    </center>
+    <br>
 </div>
 
 <br>

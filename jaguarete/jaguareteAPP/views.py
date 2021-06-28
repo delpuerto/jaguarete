@@ -1,9 +1,9 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, get_object_or_404
 from django.http import HttpResponse
-from .forms import CustomUserCreationForm, ContactoForm, ProductoForm
+from .forms import CustomUserCreationForm, ContactoForm, ProductoForm, CategoriaForm
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
-from .models import Producto
+from .models import Categoria, Producto
 
 # PAGINA INICIAL
 def index(request):
@@ -16,9 +16,13 @@ def index(request):
     return render(request,"home/index.html", data)
 
 
+
+
 # PAGINA ACERCA DE
 def acerca(request):
     return render(request,"home/acerca.html")
+
+
 
 
 # PAGINA CONTACTO
@@ -36,6 +40,8 @@ def contacto(request):
             data["form"] = formulario
 
     return render(request,"home/contacto.html", data)
+
+
 
 
 
@@ -58,6 +64,7 @@ def registro(request):
 
 
 
+
 # PAGINA AGREGAR PRODUCTO
 def agregar_producto(request):
     data = {
@@ -73,7 +80,9 @@ def agregar_producto(request):
     return render(request,"producto/agregar.html", data)
 
 
-    # PAGINA INICIAL
+
+
+# PAGINA LISTAR PRODUCTO
 def listar_productos(request):
     productos = Producto.objects.all()
     data = {
@@ -81,3 +90,85 @@ def listar_productos(request):
     }
     return render(request,"producto/listar.html", data)
 
+
+
+
+# PAGINA MODIFICAR PRODUCTO
+def modificar_producto(request, id):
+    producto = get_object_or_404(Producto, id=id)
+    data = {
+        'form': ProductoForm(instance=producto)
+    }
+    if request.method == 'POST':
+        formulario = ProductoForm(data=request.POST, instance=producto, files=request.FILES)
+        if formulario.is_valid():
+            formulario.save()
+            return redirect(to="listar_productos")
+        else:
+            data["form"] = formulario
+    return render(request,"producto/modificar.html", data)
+
+
+
+
+
+# PAGINA ELIMINAR PRODUCTO
+def eliminar_producto(request, id):
+    producto = get_object_or_404(Producto, id=id)
+    producto.delete()
+    return redirect(to="listar_productos")
+
+
+
+
+
+# PAGINA AGREGAR CATEGORIA
+def agregar_categoria(request):
+    data = {
+        'form': CategoriaForm()
+    }
+    if request.method == 'POST':
+        formulario = CategoriaForm(data=request.POST)
+        if formulario.is_valid():
+            formulario.save()
+            data["mensaje"] = "Guardado correctamente!"
+        else:
+            data["form"] = formulario
+    return render(request,"categoria/agregar.html", data)
+
+
+# PAGINA LISTAR CATEGORIA
+def listar_categorias(request):
+    categoria = Categoria.objects.all()
+    data = {
+        'categorias': categoria 
+    }
+    return render(request,"categoria/listar.html", data)
+
+
+
+
+# PAGINA MODIFICAR CATEGORIA
+def modificar_categoria(request, id):
+    categoria = get_object_or_404(Categoria, id=id)
+    data = {
+        'form': CategoriaForm(instance=categoria)
+    }
+    if request.method == 'POST':
+        formulario = CategoriaForm(data=request.POST, instance=categoria)
+        if formulario.is_valid():
+            formulario.save()
+            return redirect(to="listar_categorias")
+        else:
+            data["form"] = formulario
+    return render(request,"categoria/modificar.html", data)
+
+
+
+
+
+# PAGINA ELIMINAR CATEGORIA
+def eliminar_categoria(request, id):
+    categoria = get_object_or_404(Categoria, id=id)
+    categoria.delete()
+    return redirect(to="listar_categorias")
