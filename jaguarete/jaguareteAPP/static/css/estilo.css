@@ -258,15 +258,18 @@ input.image_buscar {
 
 
 
-
+.container{
+    text-align: center;
+}
 .productos {
     display: inline-flex;
     flex-wrap: wrap;
     align-content: center;
+    text-align: center;
 }
 
 .producto {
-    width: 25%;
+    width: 250px;
     margin-top: 20px;
 }
 
