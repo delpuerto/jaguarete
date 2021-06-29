@@ -29,26 +29,28 @@
 
 <br>
 
-<div class="container">
+<div class="container">    
     <div class="card">
         <div class="card-body">
-            <h5>Lista completa</h5>
-            <hr>
-            <table class="table table-striped table-hover table-responsive-sm">
+            <b>Productos</b>
+            <table class="table small table-striped table-hover table-responsive-sm">
                 <tr>
                     <th>Nombre</th>
                     <th>Precio</th>
                     <th>Categoria</th>
                 </tr>
             
-                {% for p in todos %}
+                {% for p in entity %}
                     <tr>
-                        <td>{{p.nombre | title}}</td>
+                        <td align="left" >{{p.nombre | title}}</td>
                         <td align="right">${{p.precio | intcomma}}</td>
-                        <td>{{p.categoria}}</td>
+                        <td align="left" >{{p.categoria}}</td>
                     </tr>
                 {% endfor %}
             </table>
+            <div>
+                {% include 'home/paginator.html' %}
+            </div>
         </div>
     </div>
 </div>

@@ -1,19 +1,53 @@
+from django.core import paginator
+from django.http.response import Http404
 from django.shortcuts import redirect, render, get_object_or_404
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from .forms import CustomUserCreationForm, ContactoForm, ProductoForm, CategoriaForm
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from .models import Categoria, Producto
+from django.core.paginator import Paginator
 
 # PAGINA INICIAL
 def index(request):
     productos = Producto.objects.all().order_by('-id')[:3]
     todos     = Producto.objects.all()
+    page      = request.GET.get('page', 1)
+
+    try:
+        paginator = Paginator(todos, 3)
+        todos     = paginator.page(page)
+    except:
+        raise Http404
+
     data = {
         'productos': productos,
-        'todos': todos 
+        'entity': todos,
+        'paginator': paginator 
     }
     return render(request,"home/index.html", data)
+
+
+
+
+# PAGINA LISTAR PRODUCTO
+def listar_productos(request):
+    productos = Producto.objects.all()
+    page      = request.GET.get('page', 1)
+    try:
+        paginator = Paginator(productos, 3)
+        productos = paginator.page(page)
+    except:
+        raise Http404
+    data = {
+        'entity': productos ,
+        'paginator': paginator
+    }
+    return render(request,"producto/listar.html", data)
+
+
+
+
 
 
 
@@ -81,14 +115,6 @@ def agregar_producto(request):
 
 
 
-
-# PAGINA LISTAR PRODUCTO
-def listar_productos(request):
-    productos = Producto.objects.all()
-    data = {
-        'productos': productos 
-    }
-    return render(request,"producto/listar.html", data)
 
 
 
