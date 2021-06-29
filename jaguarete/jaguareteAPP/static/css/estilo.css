@@ -274,8 +274,11 @@ input.image_buscar {
 }
 
 .producto img {
-    width: 100%;
-    height: 200px;
+    /*width: 180px;
+    height: 200px;*/
+    height: auto;
+    min-height: 180px;
+    max-height: 180px;
     object-fit: cover;
 }
 
@@ -290,3 +293,4 @@ input.image_buscar {
     border-radius: 6px 6px  6px 6px;
     box-shadow: 3px 4px 4px 2px rgba(0, 0, 0, 0.3);
 }
+

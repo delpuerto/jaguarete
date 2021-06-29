@@ -30,15 +30,14 @@ def contacto(request):
     data = {
         'form': ContactoForm()
     }
-
     if request.method == 'POST':
         formulario = ContactoForm(data=request.POST)
         if formulario.is_valid():
             formulario.save()
+            messages.success(request, "Mensaje de contacto Guardado correctamente")
             data["mensaje"] = "Contacto Guardado!"
         else:
             data["form"] = formulario
-
     return render(request,"home/contacto.html", data)
 
 

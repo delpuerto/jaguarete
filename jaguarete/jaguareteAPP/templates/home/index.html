@@ -3,15 +3,19 @@
 
 {% load humanize %}
 
-<div class="container">
+<div class="container"> 
 
     <div class="productos">
                 {% for p in productos %}
                 <div class="producto">
                     <div class="contenedor_producto">
-                        {% if p.imagen %}
-                            <img src="{{ p.imagen.url }}" alt="imagen producto">
-                        {% endif %}
+
+                        <div>
+                            {% if p.imagen %}
+                                <img src="{{ p.imagen.url }}" class="img-fluid" alt="imagen producto">
+                            {% endif %}
+                        </div>
+
                         <div class="detalle">
                             <b>{{ p.categoria | capfirst }}</b>
                             <h5>{{ p.nombre | title }}</h5>
@@ -40,7 +44,7 @@
                 {% for p in todos %}
                     <tr>
                         <td>{{p.nombre | title}}</td>
-                        <td>${{p.precio | intcomma}}</td>
+                        <td align="right">${{p.precio | intcomma}}</td>
                         <td>{{p.categoria}}</td>
                     </tr>
                 {% endfor %}
