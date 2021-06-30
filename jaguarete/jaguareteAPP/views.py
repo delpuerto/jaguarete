@@ -7,8 +7,13 @@ from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from .models import Categoria, Producto
 from django.core.paginator import Paginator
+from django.contrib.admin.views.decorators import staff_member_required
+from django.contrib.auth.decorators import permission_required, user_passes_test
 
-# PAGINA INICIAL
+
+
+
+# PAGINA INICIAL ---------------------------------------------------------------
 def index(request):
     productos = Producto.objects.all().order_by('-id')[:3]
     todos     = Producto.objects.all()
@@ -29,37 +34,13 @@ def index(request):
 
 
 
-
-# PAGINA LISTAR PRODUCTO
-def listar_productos(request):
-    productos = Producto.objects.all()
-    page      = request.GET.get('page', 1)
-    try:
-        paginator = Paginator(productos, 3)
-        productos = paginator.page(page)
-    except:
-        raise Http404
-    data = {
-        'entity': productos ,
-        'paginator': paginator
-    }
-    return render(request,"producto/listar.html", data)
-
-
-
-
-
-
-
-
-# PAGINA ACERCA DE
+# PAGINA ACERCA DE -------------------------------------------------------------
 def acerca(request):
     return render(request,"home/acerca.html")
 
 
 
-
-# PAGINA CONTACTO
+# PAGINA CONTACTO --------------------------------------------------------------
 def contacto(request):
     data = {
         'form': ContactoForm()
@@ -76,9 +57,7 @@ def contacto(request):
 
 
 
-
-
-# REGISTRO DE USUARIOS
+# REGISTRO DE USUARIOS ---------------------------------------------------------
 def registro(request):
     data={
         'form': CustomUserCreationForm()
@@ -98,7 +77,26 @@ def registro(request):
 
 
 
+#==============================================================================
+# PAGINA LISTAR PRODUCTO
+def listar_productos(request):
+    productos = Producto.objects.all()
+    page      = request.GET.get('page', 1)
+    try:
+        paginator = Paginator(productos, 3)
+        productos = paginator.page(page)
+    except:
+        raise Http404
+    data = {
+        'entity': productos ,
+        'paginator': paginator
+    }
+    return render(request,"producto/listar.html", data)
+
+
+
 # PAGINA AGREGAR PRODUCTO
+@user_passes_test(lambda u: u.is_staff)
 def agregar_producto(request):
     data = {
         'form': ProductoForm()
@@ -115,11 +113,8 @@ def agregar_producto(request):
 
 
 
-
-
-
-
 # PAGINA MODIFICAR PRODUCTO
+@user_passes_test(lambda u: u.is_staff)
 def modificar_producto(request, id):
     producto = get_object_or_404(Producto, id=id)
     data = {
@@ -137,9 +132,8 @@ def modificar_producto(request, id):
 
 
 
-
-
 # PAGINA ELIMINAR PRODUCTO
+@user_passes_test(lambda u: u.is_staff)
 def eliminar_producto(request, id):
     producto = get_object_or_404(Producto, id=id)
     producto.delete()
@@ -150,7 +144,19 @@ def eliminar_producto(request, id):
 
 
 
+#==============================================================================
+# PAGINA LISTAR CATEGORIA
+def listar_categorias(request):
+    categoria = Categoria.objects.all()
+    data = {
+        'categorias': categoria 
+    }
+    return render(request,"categoria/listar.html", data)
+
+
+
 # PAGINA AGREGAR CATEGORIA
+@user_passes_test(lambda u: u.is_staff)
 def agregar_categoria(request):
     data = {
         'form': CategoriaForm()
@@ -166,18 +172,9 @@ def agregar_categoria(request):
     return render(request,"categoria/agregar.html", data)
 
 
-# PAGINA LISTAR CATEGORIA
-def listar_categorias(request):
-    categoria = Categoria.objects.all()
-    data = {
-        'categorias': categoria 
-    }
-    return render(request,"categoria/listar.html", data)
-
-
-
 
 # PAGINA MODIFICAR CATEGORIA
+@user_passes_test(lambda u: u.is_staff)
 def modificar_categoria(request, id):
     categoria = get_object_or_404(Categoria, id=id)
     data = {
@@ -195,11 +192,25 @@ def modificar_categoria(request, id):
 
 
 
-
-
 # PAGINA ELIMINAR CATEGORIA
+@user_passes_test(lambda u: u.is_staff)
 def eliminar_categoria(request, id):
     categoria = get_object_or_404(Categoria, id=id)
     categoria.delete()
     messages.success(request, "Eliminada correctamente")
     return redirect(to="listar_categorias")
+
+
+
+
+
+
+# PAGINA Mostrar producto
+@user_passes_test(lambda u: u.is_authenticated)
+def mostrar_producto(request, id):
+    producto = Producto.objects.get(id=id)
+    data = {
+        'producto': producto 
+    }
+    return render(request,"producto/mostrar.html", data)
+

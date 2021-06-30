@@ -19,11 +19,13 @@
             
                 {% for p in categorias %}
                     <tr>
-                        <td>{{p.nombre | title}}</td>
+                        <td align="left">{{p.nombre | title}}</td>
                         <td>
-                            <a href="{% url 'modificar_categoria' p.id %}" class="btn btn-info btn-sm">Modificar</a>
-                            &nbsp;
-                            <a href="{% url 'eliminar_categoria' p.id %}" class="btn btn-danger btn-sm">Eliminar</a>
+                            {% if user.is_staff %}
+                                <a href="{% url 'modificar_categoria' p.id %}" class="btn btn-info btn-sm">Modificar</a>
+                                &nbsp;
+                                <a href="{% url 'eliminar_categoria' p.id %}" class="btn btn-danger btn-sm">Eliminar</a>
+                            {% endif %}
                         </td>
                     </tr>
                 {% endfor %}
@@ -32,10 +34,12 @@
         </div>
     </div>
 
-    <br>
-    <center>
-    <a href="{% url 'agregar_categoria' %}" class="btn btn-primary btn-sm">Agregar Nueva Categoria</a>
-    </center>
+    {% if user.is_staff %}
+        <br>
+        <center>
+        <a href="{% url 'agregar_categoria' %}" class="btn btn-primary btn-sm">Agregar Nueva Categoria</a>
+        </center>
+    {% endif %}
     <br>
 </div>
 

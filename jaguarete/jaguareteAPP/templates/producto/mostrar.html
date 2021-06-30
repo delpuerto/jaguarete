@@ -1,0 +1,50 @@
+{% extends 'home/base.html' %}
+{% block contenido %}
+
+{% load humanize %}
+
+<div class="container2"> 
+
+    <div class="productos2">
+
+                <div class="producto2">
+                    <div class="contenedor_producto2">
+
+                        <div>
+                            {% if producto.imagen %}
+                                <img src="{{ producto.imagen.url }}" class="img-fluid" alt="imagen producto">
+                            {% endif %}
+                        </div>
+
+                        <div class="detalle2">
+                            <h3>{{ producto.nombre | title }}</h3>
+                            <b>Categoria: {{ producto.categoria | capfirst }}</b>
+                            <br>                            
+                            <b>
+                                {% if producto.nuevo %}
+                                    Producto nuevo!
+                                {% else %}
+                                    Producto usado
+                                {% endif %}
+                            </b>
+                            <br>
+                            <b>Descripción: {{ producto.descripcion | capfirst }}</b>
+                            <br>
+                            <h4>Precio: ${{ producto.precio | intcomma }}</h4>
+                            
+                            {% if user.is_authenticated %}
+                                <div class="d-flex justify-content-end">
+                                <a href="#" class="btn btn-info btn-sm" align="right">Agregar al carrito</a>
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        
+                    </div>
+                </div>
+
+    </div>
+</div>
+
+<br>
+{% endblock %}
