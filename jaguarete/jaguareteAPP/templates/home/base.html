@@ -49,11 +49,14 @@
                 <li><a href="{% url 'listar_categorias' %}">Categorias</a></li>
                 <li><a href="{% url 'acerca' %}">Acerca de</a></li>
                 <li><a href="{% url 'contacto' %}">Contacto</a></li>
-                <li><a href="{% url 'listar_productos' %}">Productos</a></li>
+                {% if user.is_staff %}
+                    <li><a href="{% url 'listar_productos' %}">Nuevo Producto</a></li>
+                {% endif %}
                 <li>                   
                     <div class="buscador">
-                        <form action="#">
-                            <input type="text" class="buscar" name="busk" id="busk" placeholder="Buscar..." title="Ingrese la busqueda y pulse Enter" onkeyup="if(event.keyCode == 13)busqueda();">
+                        <form action="{% url 'resultado' %}" method="post" id="myForm">
+                            {% csrf_token %}
+                            <input type="text" class="buscar" name="busk" id="busk" placeholder="Buscar..." title="Ingrese la busqueda y pulse Enter" onkeyup="if(event.keyCode == 13)buscar('hola');">
                             <input type="image" src="{% static '/img/lupa.png' %}" class="image_buscar">
                         </form>
                     </div> 

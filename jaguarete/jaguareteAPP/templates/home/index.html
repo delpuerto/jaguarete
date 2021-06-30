@@ -47,9 +47,7 @@
                         <td align="right">${{p.precio | intcomma}}</td>
                         <td align="left" >{{p.categoria}}</td>
                         <td>
-                            {% if user.is_authenticated %} 
-                                <a href="{% url 'mostrar_producto' p.id %}" class="link-info">Detalles...</a>
-                            {% endif %}
+                            <a href="{% url 'mostrar_producto' p.id %}" class="link-info">Detalles...</a>
                         </td>
                     </tr>
                 {% endfor %}

@@ -1,0 +1,42 @@
+{% extends 'home/base.html' %}
+{% block contenido %}
+
+{% load humanize %}
+
+<br>
+<div class="container bg-light">
+    <br>
+    <div class="card">
+        <div class="card-body">
+            <p align="left"><b>Resultados de busqueda</b></p>
+            <hr>
+            <table class="table small table-striped table-hover table-responsive-md">
+                <tr>
+                    <th>Nombre</th>
+                    <th>Precio</th>
+                    <th>Categoria</th>
+                    <th>Opciones</th>
+                </tr>
+                {% for p in res %}
+                    <tr>
+                        <td align="left" >{{p.nombre | title}}</td>
+                        <td align="right">${{p.precio | intcomma}}</td>
+                        <td align="left" >{{p.categoria}}</td>
+                        <td>
+                            {% if user.is_authenticated %}
+                                <a href="{% url 'mostrar_producto' p.id %}" class="link-info">Detalles...</a>
+                            {% else %}
+                                <div class="small">Debe loguearse para comprar o ver detalles</div>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+
+            </table>
+            {{ texto }}
+        </div>
+    </div>
+</div>
+
+<br>
+{% endblock %}

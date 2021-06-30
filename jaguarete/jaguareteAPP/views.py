@@ -214,3 +214,25 @@ def mostrar_producto(request, id):
     }
     return render(request,"producto/mostrar.html", data)
 
+
+
+
+# PAGINA Resultado ---------------------------------------------------------------
+def resultado(request):
+    todos = ""    
+    txt   = ""
+    if request.method == 'POST':
+        txt = request.POST.get("busk")
+    
+    if txt:
+        todos = Producto.objects.filter(nombre__contains=txt)
+        data = {
+            'res': todos,
+            'texto': "resultados de la busqueda: '" + txt + "'"
+        }
+    else:
+        data = {
+            'res': todos,
+            'texto': "No se encontro resultado con el criterio buscado" 
+        }
+    return render(request,"home/resultados.html", data)
