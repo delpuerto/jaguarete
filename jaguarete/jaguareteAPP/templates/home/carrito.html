@@ -1,12 +1,50 @@
 {% extends 'home/base.html' %}
 {% block contenido %}
+{% load humanize %}
+{% load mathfilters %}
 
-hola carro!!
+<div class="container">    
+    <div class="card">
+        <div class="card-body">
+            <p align="left"><b>Contenido del carrito</b></p>
+            <table class="table small table-striped table-hover table-responsive-sm">
+                <tr>
+                    <th>Cantidad</th>
+                    <th>Producto</th>
+                    <th>Precio Unitario</th>
+                    <th>Importe</th>
+                    <th>Opciones</th>
+                </tr>
+            
+                {% if request.session.carro.items %}                
+                    {% for key, p in request.session.carro.items %}
+                        <tr>
+                            <td align="right">{{p.cantidad}}</td>
+                            <td align="left" >{{p.nombre | title}}</td>
+                            <td align="right">{{p.precio | intcomma}}</td>                        
+                            <td align="right" >{{ p.precio|mul:p.cantidad |intcomma}}</td>
+                            <td>
+                                <a href="{% url 'agregar_producto' p.producto_id %}" class="btn small btn-info btn-sm">Agregar 1</a>
+                                &nbsp;
+                                <a href="{% url 'restar_producto' p.producto_id %}" class="btn small btn-info btn-sm">Quitar 1</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
 
-{%for p in carro %}
+                {% else %}
+                    <tr>
+                        <td colspan="5">Carrito Vacio</td>
+                    </tr>
+                {% endif %}
+            </table>
+            <div class="d-flex justify-content-end">
+                <a href="{% url 'vaciar_producto' %}" class="btn btn-danger btn-sm">Vaciar Carrito</a>
+                &nbsp;
+                <a href="#" class="btn btn-primary btn-sm">Comprar</a>
+            </div>
+        </div>
+    </div>
+</div>
 
-    <br> listo!!
-
-{% endfor %}
 
 {% endblock %}
