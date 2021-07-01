@@ -1,3 +1,4 @@
+from .carro import Carro
 from django.core import paginator
 from django.http.response import Http404
 from django.shortcuts import redirect, render, get_object_or_404
@@ -236,3 +237,26 @@ def resultado(request):
             'texto': "No se encontro resultado con el criterio buscado" 
         }
     return render(request,"home/resultados.html", data)
+
+
+
+# Agregar Producto al carro ------------------------------------------------------
+@user_passes_test(lambda u: u.is_authenticated)
+def agregar_producto(request, id):
+    producto = Producto.objects.get(id=id)
+    carro = Carro(request)
+    #carro.agregar(producto=producto)
+    carro.agregar(producto)
+    messages.success(request, "Producto agregado al carro de compras!")
+    return redirect("index")
+
+
+
+
+# PAGINA ACERCA DE -------------------------------------------------------------
+def carrito(request):
+    carro = request.session["carro"].items()
+    data={
+        'carro': carro
+    }
+    return render(request,"home/carrito.html", data)
