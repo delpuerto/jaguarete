@@ -16,7 +16,6 @@ class Contacto(models.Model):
     tipo_consulta = models.IntegerField(choices=opciones_consultas)
     mensaje       = models.TextField(null=True)
     avisos        = models.BooleanField(default=False)
-
     def __str__(self):
         return self.nombre
 
@@ -25,7 +24,6 @@ class Contacto(models.Model):
 
 class Categoria(models.Model):
     nombre = models.CharField(max_length=50)
-
     def __str__(self):
         return self.nombre
 
@@ -39,7 +37,6 @@ class Producto(models.Model):
     nuevo       = models.BooleanField(default=False)
     categoria   = models.ForeignKey(Categoria, on_delete=models.PROTECT)
     imagen      = models.ImageField(upload_to="productos", null=True)
-    
     def __str__(self):
         return self.nombre
 

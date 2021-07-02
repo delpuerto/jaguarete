@@ -38,11 +38,11 @@
                                     {% if user.is_authenticated %}
                                         {% if not user.is_staff %}
                                             &nbsp;
-                                            <a href="{% url 'agregar_producto' producto.id %}" class="btn btn-primary btn-sm" align="right">Agregar al carrito</a>
+                                            <a href="{% url 'agregarProducto' producto.id %}" class="btn btn-primary btn-sm" align="right">Agregar al carrito</a>
                                         {% endif %}
                                     {% else %}
                                         &nbsp;
-                                        <a href="{% url 'agregar_producto' producto.id %}" class="btn btn-primary btn-sm" align="right">Agregar al carrito</a>
+                                        <a href="{% url 'agregarProducto' producto.id %}" class="btn btn-primary btn-sm" align="right">Agregar al carrito</a>
                                     {% endif %}
                                 </div>
                             

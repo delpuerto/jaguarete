@@ -242,7 +242,7 @@ def resultado(request):
 
 # Agregar Producto al carro ------------------------------------------------------
 @user_passes_test(lambda u: u.is_authenticated)
-def agregar_producto(request, id):
+def agregarProducto(request, id):
     producto = Producto.objects.get(id=id)
     carro = Carro(request)
     carro.agregar(producto)

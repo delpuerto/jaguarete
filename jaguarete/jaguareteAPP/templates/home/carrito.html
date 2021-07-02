@@ -24,7 +24,7 @@
                             <td align="right">{{p.precio | intcomma}}</td>                        
                             <td align="right" >{{ p.precio|mul:p.cantidad |intcomma}}</td>
                             <td>
-                                <a href="{% url 'agregar_producto' p.producto_id %}" class="btn small btn-info btn-sm">Agregar 1</a>
+                                <a href="{% url 'agregarProducto' p.producto_id %}" class="btn small btn-info btn-sm">Agregar 1</a>
                                 &nbsp;
                                 <a href="{% url 'restar_producto' p.producto_id %}" class="btn small btn-info btn-sm">Quitar 1</a>
                             </td>
