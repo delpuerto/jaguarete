@@ -207,7 +207,7 @@ def eliminar_categoria(request, id):
 
 
 # PAGINA Mostrar producto
-@user_passes_test(lambda u: u.is_authenticated)
+# @user_passes_test(lambda u: u.is_authenticated)
 def mostrar_producto(request, id):
     producto = Producto.objects.get(id=id)
     data = {
@@ -275,3 +275,26 @@ def vaciar_producto(request):
 @user_passes_test(lambda u: u.is_authenticated)
 def carrito(request):
     return render(request,"home/carrito.html")
+
+
+
+
+
+
+# PAGINA Busca Categoria ---------------------------------------------------------------
+def bus_cat(request, categoria_nombre):
+    todos = ""    
+    txt   = categoria_nombre
+    
+    if txt:
+        todos = Producto.objects.filter(categoria=txt)
+        data = {
+            'res': todos,
+            'texto': ""
+        }
+    else:
+        data = {
+            'res': todos,
+            'texto': "No se encontro resultado con el criterio buscado" 
+        }
+    return render(request,"home/resultados.html", data)

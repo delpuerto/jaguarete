@@ -32,11 +32,20 @@
                             <br>
                             <h4>Precio: ${{ producto.precio | intcomma }}</h4>
                             
-                            {% if user.is_authenticated %}
+                            
                                 <div class="d-flex justify-content-end">
-                                <a href="{% url 'agregar_producto' producto.id %}" class="btn btn-info btn-sm" align="right">Agregar al carrito</a>
+                                    <a href="#" class="btn btn-info btn-sm" align="right" onclick="window.history.go(-1); return false;">Volver</a>
+                                    {% if user.is_authenticated %}
+                                        {% if not user.is_staff %}
+                                            &nbsp;
+                                            <a href="{% url 'agregar_producto' producto.id %}" class="btn btn-primary btn-sm" align="right">Agregar al carrito</a>
+                                        {% endif %}
+                                    {% else %}
+                                        &nbsp;
+                                        <a href="{% url 'agregar_producto' producto.id %}" class="btn btn-primary btn-sm" align="right">Agregar al carrito</a>
+                                    {% endif %}
                                 </div>
-                            {% endif %}
+                            
                         </div>
 
                         

@@ -28,17 +28,23 @@
                     <a href="{% url 'logout' %}">
                         <input type="button" value="Logout @ {{user.username}}"  name="Btn_1" class="btnBase2">
                     </a>
+                    {% if not user.is_staff %}
+                        <input type="button" value="Registro" name="Btn_2" class="btnBase2" onclick="alert('Ya se encuentra registrado');">
+                        <a href="{% url 'carrito' %}">
+                            <input type="button" value="Carrito"  name="Btn_3" class="btnBase2" onclick="Btn_3();">
+                        </a>
+                    {% endif %}
                 {% else %}
                     <a href="{% url 'login' %}">
                         <input type="button" value="Login"   name="Btn_1" class="btnBase2">
                     </a>
+                    <a href="{% url 'registro' %}">
+                        <input type="button" value="Registro" name="Btn_2" class="btnBase2">
+                    </a>
+                    <a href="{% url 'carrito' %}">
+                        <input type="button" value="Carrito"  name="Btn_3" class="btnBase2" onclick="Btn_3();">
+                    </a>
                 {% endif %}
-                <a href="{% url 'registro' %}">
-                    <input type="button" value="Registro" name="Btn_2" class="btnBase2">
-                </a>
-                <a href="{% url 'carrito' %}">
-                    <input type="button" value="Carrito"  name="Btn_3" class="btnBase2" onclick="Btn_3();">
-                </a>
         </div>    
     </div>
 

@@ -16,11 +16,13 @@
                             {% endif %}
                         </div>
 
-                        <div class="detalle">
-                            <b>{{ p.categoria | capfirst }}</b>
-                            <h5>{{ p.nombre | title }}</h5>
-                            <h4>${{ p.precio | intcomma }}</h4>
+                        <div class="detalle small">
+                            <!-- b>{{ p.categoria | capfirst }}</b -->
+                            <b>{{ p.nombre | title }}</b>
+                            <!-- h4>${{ p.precio | intcomma }}</h4 -->
                         </div>
+                        <a href="{% url 'mostrar_producto' p.id %}" class="btn small btn-primary">Mostrar</a>
+                        <br><br>
                     </div>
                 </div>
                 {% endfor %}
